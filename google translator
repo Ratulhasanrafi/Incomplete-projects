@@ -1,0 +1,63 @@
+#first install -->pip install googletrans==4.0.0-rc1<--
+from tkinter import *
+from tkinter import ttk
+from googletrans import Translator, LANGUAGES
+
+def change(text="type", src="english", dest="hindi"):
+  txt=text
+  src1= src
+  dest1= dest
+  trans=Translator()
+  translated=trans.translate(text,src=src1,dest=dest1)
+  return translated.text
+
+def data():
+  s=comb_sor.get()
+  d=comb_des.get()
+  textget=sor_txt.get(1.0, END)
+  tran=change(text=textget,src=s,dest=d)
+  des_txt.delete(1.0, END)
+  des_txt.insert(END, tran)
+
+
+
+
+
+
+root = Tk()
+
+root.title("My first app")
+root.geometry("400x500")
+root.config(bg="white")
+
+txt=Label(root,text="Translator",font=("Time New Roman",20,"bold"))
+txt.place(x=100,y=20,height=40,width=200)
+
+txt=Label(root,text="Sorce Word",font=("Time New Roman",10,"bold"))
+txt.place(x=150,y=70,height=20,width=100)
+
+f_txt=Frame(root).pack(side=LEFT)
+
+sor_txt=Text(f_txt,font=("Time New Roman",15,"bold"),wrap=WORD)
+sor_txt.place(x=70,y=100,height=70,width=260)
+
+sets=list(LANGUAGES.values())
+comb_sor=ttk.Combobox(f_txt,values=sets)
+comb_sor.place(x=20,y=200,height=20,width=100)
+comb_sor.set("Select Lenguage")
+
+comb_des=ttk.Combobox(f_txt,values=sets)
+comb_des.place(x=280,y=200,height=20,width=100)
+comb_des.set("Select Lenguage")
+
+botton=Button(f_txt,text="translate",relief=RAISED,command=data)
+botton.place(x=150,y=200,height=30,width=100)
+
+txt=Label(root,text="Transleted Word",font=("Time New Roman",10,"bold"))
+txt.place(x=150,y=270,height=20,width=130)
+
+
+des_txt=Text(f_txt,font=("Time New Roman",15,"bold"),wrap=WORD)
+des_txt.place(x=70,y=300,height=70,width=260)
+
+root.mainloop()
