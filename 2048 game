@@ -1,0 +1,149 @@
+import random
+
+mat=[[0,0,0,0],
+     [0,0,0,0],
+     [0,0,0,0],
+     [0,0,0,0]]
+
+
+
+def i2():
+  r=2
+  c=1
+  while(mat[r][c]!=0):
+    r=random.randint(0,3)
+    c=random.randint(0,3)
+
+  mat[r][c]=2
+
+
+
+def check(mat):
+  for i in range(4):
+    for j in range(4):
+      if mat[i][j]==0:
+        return True
+
+
+  for i in range(3):
+    for j in range(3):
+      if mat[i][j]==mat[i+1][j] or mat[i][j]==mat[i][j+1]:
+        return True
+
+
+
+
+  for i in range(3):
+    if mat[i][3]==mat[i+1][3]:
+      return True
+
+
+
+  for j in range(3):
+    if mat[3][j]==mat[3][j+1]:
+      return True
+
+  for i in range(4):
+   for j in range(4):
+    if mat[i][j]!=0:
+      return False
+
+
+
+
+def margey(mat):
+  for i in range(3):
+    for j in range(3):
+      if mat[i][j]==mat[i+1][j]:
+        mat[i][j]=mat[i][j]*2
+        mat[i+1][j]=0
+
+
+  for i in range(3):
+    if mat[i][3]==mat[i+1][3]:
+      mat[i][3]=mat[i][3]*2
+      mat[i+1][3]=0
+
+
+def margex(mat):
+  for i in range(3):
+    for j in range(3):
+      if mat[i][j]==mat[i][j+1]:
+        mat[i][j]=mat[i][j]*2
+        mat[i][j+1]=0
+
+
+  for j in range(3):
+    if mat[3][j]==mat[3][j+1]:
+      mat[3][j]=mat[3][j]*2
+      mat[3][j+1]=0
+
+
+
+
+#diraction exicuting part
+def d(mat):
+  for i in range(4):
+    mat[i]=mat[i][::-1]
+    for j in range(4):
+      print(j)
+      if mat[i][j]==0:
+        mat[i] = list(mat[i][:j]+mat[i][(j+1):]+mat[i][j])
+      else:
+        continue
+      print(j)
+    mat[i]=mat[i][::-1]
+
+
+
+def s(mat):
+  pass
+
+
+def a(mat):
+  for i in range(4):
+    for j in range(4):
+      if mat[i][j]==0:
+        mat[i] = mat[i][:j]+mat[i][(j+1):]+mat[i][j]
+      else:
+        continue
+
+
+def w(mat):
+  pass
+
+
+
+
+#exicuting part
+while check(mat):
+  i2()
+  print(mat[0])
+  print(mat[1])
+  print(mat[2])
+  print(mat[3])
+  user=input("enter the direction")
+  print(check(mat))
+  # if user=="w":
+  #   w(mat)
+  # elif user=="s":
+  #   s(mat)
+  # elif user=="a":
+  #   a(mat)
+  # elif user=="d":
+  #   d(mat)
+  # else:
+  #   print("invalid input")
+
+print(check(mat))
+if not check(mat):
+  print("lose")
+
+print(check(mat))
+for i in range(4):
+  for j in range(4):
+    if mat[i][j]==2048:
+      print("win")
+      break
+
+
